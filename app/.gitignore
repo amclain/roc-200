@@ -5,6 +5,7 @@
 /*.ez
 
 # Nerves artifacts
+/_nerves-tmp
 /_images
 /.nerves
 

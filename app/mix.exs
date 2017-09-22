@@ -22,7 +22,7 @@ defmodule ROC.Mixfile do
       build_embedded: Mix.env == :prod,
       start_permanent: Mix.env == :prod,
       preferred_cli_env: [espec: :test],
-      aliases: aliases(@target),
+      aliases: aliases(@target) ++ [test: "espec"],
       deps: deps(),
     ]
   end
@@ -44,7 +44,6 @@ defmodule ROC.Mixfile do
     [
       {:nerves, "0.7.5", runtime: false},
       {:exactor, "2.2.3", warn_missing: false},
-      {:nerves_ntp, "0.1.1"},
       {:espec, "1.4.6", only: :test},
     ] ++ deps(@target)
   end
@@ -57,6 +56,7 @@ defmodule ROC.Mixfile do
       {:nerves_runtime, "0.4.4"},
       {:elixir_ale, "0.5.7"},
       {:nerves_network, "0.3.3"},
+      {:nerves_ntp, "0.1.1"},
     ] ++ system(target)
   end
 
@@ -66,7 +66,9 @@ defmodule ROC.Mixfile do
   # We do not invoke the Nerves Env when running on the Host
   def aliases("host"), do: []
   def aliases(_target) do
-    ["deps.precompile": ["nerves.precompile", "deps.precompile"],
-     "deps.loadpaths":  ["deps.loadpaths", "nerves.loadpaths"]]
+    [
+      "deps.precompile": ["nerves.precompile", "deps.precompile"],
+      "deps.loadpaths":  ["deps.loadpaths", "nerves.loadpaths"],
+    ]
   end
 end

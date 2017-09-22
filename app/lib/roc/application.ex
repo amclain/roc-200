@@ -1,12 +1,13 @@
 defmodule ROC.Application do
   use Application
 
-  alias ROC.Network
+  alias ROC.{Buttons, Network}
 
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
 
     children = [
+      worker(Buttons, []),
       worker(Network, []),
     ]
 

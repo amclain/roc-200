@@ -16,3 +16,12 @@ config :nerves_ntp, :servers, [
 ]
 
 config :roc, :network_interface, "eth0"
+
+config :roc_controller_io,
+  start_button: 67,
+  stop_button: 68,
+  mode_button: 44,
+  speaker: "ehrpwm2a",
+  top_element: 66,
+  bottom_element: 69,
+  convection_fan: 45

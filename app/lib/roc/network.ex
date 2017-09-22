@@ -1,7 +1,7 @@
 defmodule ROC.Network do
-  require Logger
-
   use ExActor.GenServer, export: __MODULE__
+
+  require Logger
 
   alias Nerves.Network
   alias Nerves.Ntp
