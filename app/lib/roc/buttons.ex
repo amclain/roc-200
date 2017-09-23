@@ -44,7 +44,7 @@ defmodule ROC.Buttons do
   end
 
   @doc """
-  Subscribe to button events.
+  Subscribe to :button_press events.
   Messages are sent in the following format:
     {:button_press, button, value}
   """
