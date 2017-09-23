@@ -24,4 +24,5 @@ config :roc_controller_io,
   speaker: "ehrpwm2a",
   top_element: 66,
   bottom_element: 69,
-  convection_fan: 45
+  convection_fan: 45,
+  running_light: 47
