@@ -3,16 +3,17 @@ defmodule ROC.Buttons do
   Manages physical buttons attached to the controller.
   """
 
-  use ExActor.GenServer, export: __MODULE__
-
-  require Logger
-
   defmodule State, do: defstruct [
     :subscribers,
     :start_button_pid,
     :stop_button_pid,
     :mode_button_pid,
   ]
+
+  use ExActor.GenServer, export: __MODULE__
+  use ROC.Subscribable, event_name: :button_press
+
+  require Logger
 
   @start_button_pin Application.get_env(:roc_controller_io, :start_button)
   @stop_button_pin Application.get_env(:roc_controller_io, :stop_button)
@@ -41,31 +42,6 @@ defmodule ROC.Buttons do
     Gpio.release(state.mode_button_pid)
 
     stop_server(:normal)
-  end
-
-  @doc """
-  Subscribe to :button_press events.
-  Messages are sent in the following format:
-    {:button_press, button, value}
-  """
-  defcast subscribe(subscriber), state: state do
-    subscribers = [subscriber | state.subscribers] |> Enum.uniq
-    new_state(%State{state | subscribers: subscribers})
-  end
-
-  @doc """
-  Unsubscribe from button events.
-  """
-  defcast unsubscribe(subscriber), state: state do
-    subscribers = state.subscribers |> List.delete(subscriber)
-    new_state(%State{state | subscribers: subscribers})
-  end
-
-  defp notify_subscribers(subscribers, button, value) do
-    subscribers
-    |> Enum.each(fn(subscriber) ->
-      send subscriber, {:button_press, button, value}
-    end)
   end
 
   defhandleinfo {:gpio_interrupt, pin, edge}, state: state do

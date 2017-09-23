@@ -25,7 +25,7 @@ defmodule ROC.ButtonsTest do
     # :ok = Buttons.stop
   end
 
-  it "can subscribe to events" do
+  it "sends start button events" do
     self() |> Buttons.subscribe
 
     send Buttons, {:gpio_interrupt, @start_button_pin, :rising}
@@ -33,31 +33,25 @@ defmodule ROC.ButtonsTest do
 
     send Buttons, {:gpio_interrupt, @start_button_pin, :falling}
     assert_receive {:button_press, :start_button, false}
+  end
+
+  it "sends stop button events" do
+    self() |> Buttons.subscribe
 
     send Buttons, {:gpio_interrupt, @stop_button_pin, :rising}
     assert_receive {:button_press, :stop_button, true}
 
     send Buttons, {:gpio_interrupt, @stop_button_pin, :falling}
     assert_receive {:button_press, :stop_button, false}
+  end
+
+  it "sends mode button events" do
+    self() |> Buttons.subscribe
 
     send Buttons, {:gpio_interrupt, @mode_button_pin, :rising}
     assert_receive {:button_press, :mode_button, true}
 
     send Buttons, {:gpio_interrupt, @mode_button_pin, :falling}
     assert_receive {:button_press, :mode_button, false}
-  end
-
-  it "can unsubscribe from events" do
-    # Ensure a double subscribe is accounted for.
-    self() |> Buttons.subscribe
-    self() |> Buttons.subscribe
-
-    send Buttons, {:gpio_interrupt, @start_button_pin, :rising}
-    assert_receive {:button_press, :start_button, true}
-
-    self() |> Buttons.unsubscribe
-
-    send Buttons, {:gpio_interrupt, @start_button_pin, :rising}
-    refute_receive {:button_press, :start_button, true}
   end
 end

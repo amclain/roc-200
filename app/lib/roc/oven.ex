@@ -3,10 +3,6 @@ defmodule ROC.OvenRelays do
   Manages control over the oven's high voltage relays.
   """
 
-  use ExActor.GenServer, export: __MODULE__
-
-  require Logger
-
   defmodule State, do: defstruct [
     :subscribers,
     :top_element_pid,
@@ -16,6 +12,11 @@ defmodule ROC.OvenRelays do
     :convection_fan_pid,
     :convection_fan_value,
   ]
+
+  use ExActor.GenServer, export: __MODULE__
+  use ROC.Subscribable, event_name: :oven_relay
+
+  require Logger
 
   @top_element_pin Application.get_env(:roc_controller_io, :top_element)
   @bottom_element_pin Application.get_env(:roc_controller_io, :bottom_element)
@@ -47,31 +48,6 @@ defmodule ROC.OvenRelays do
     Gpio.release(state.convection_fan_pid)
 
     stop_server(:normal)
-  end
-
-  @doc """
-  Subscribe to :oven_relay events.
-  Messages are sent in the following format:
-    {:oven, component, value}
-  """
-  defcast subscribe(subscriber), state: state do
-    subscribers = [subscriber | state.subscribers] |> Enum.uniq
-    new_state(%State{state | subscribers: subscribers})
-  end
-
-  @doc """
-  Unsubscribe from oven events.
-  """
-  defcast unsubscribe(subscriber), state: state do
-    subscribers = state.subscribers |> List.delete(subscriber)
-    new_state(%State{state | subscribers: subscribers})
-  end
-
-  defp notify_subscribers(subscribers, component, value) do
-    subscribers
-    |> Enum.each(fn(subscriber) ->
-      send subscriber, {:oven_relay, component, value}
-    end)
   end
 
   @doc """
