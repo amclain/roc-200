@@ -18,14 +18,16 @@ defmodule ROC.OvenRelays do
 
   require Logger
 
+  alias ElixirALE.GPIO
+
   @top_element_pin Application.get_env(:roc_controller_io, :top_element)
   @bottom_element_pin Application.get_env(:roc_controller_io, :bottom_element)
   @convection_fan_pin Application.get_env(:roc_controller_io, :convection_fan)
 
   defstart start_link do
-    {:ok, top_element_pid} = Gpio.start_link(@top_element_pin, :output)
-    {:ok, bottom_element_pid} = Gpio.start_link(@bottom_element_pin, :output)
-    {:ok, convection_fan_pid} = Gpio.start_link(@convection_fan_pin, :output)
+    {:ok, top_element_pid} = GPIO.start_link(@top_element_pin, :output)
+    {:ok, bottom_element_pid} = GPIO.start_link(@bottom_element_pin, :output)
+    {:ok, convection_fan_pid} = GPIO.start_link(@convection_fan_pin, :output)
 
     %State{
       subscribers: [],
@@ -43,9 +45,9 @@ defmodule ROC.OvenRelays do
   defcast stop, state: state do
     high_voltage_off!(state)
 
-    Gpio.release(state.top_element_pid)
-    Gpio.release(state.bottom_element_pid)
-    Gpio.release(state.convection_fan_pid)
+    GPIO.release(state.top_element_pid)
+    GPIO.release(state.bottom_element_pid)
+    GPIO.release(state.convection_fan_pid)
 
     stop_server(:normal)
   end
@@ -67,7 +69,7 @@ defmodule ROC.OvenRelays do
         Logger.debug("top_element off")
     end
 
-    :ok = state.top_element_pid |> Gpio.write(value)
+    :ok = state.top_element_pid |> GPIO.write(value)
     state.subscribers |> notify_subscribers(:top_element, value)
 
     %State{state | top_element_value: value}
@@ -90,7 +92,7 @@ defmodule ROC.OvenRelays do
         Logger.debug("bottom_element off")
     end
 
-    :ok = state.bottom_element_pid |> Gpio.write(value)
+    :ok = state.bottom_element_pid |> GPIO.write(value)
     state.subscribers |> notify_subscribers(:bottom_element, value)
 
     %State{state | bottom_element_value: value}
@@ -113,7 +115,7 @@ defmodule ROC.OvenRelays do
         Logger.debug("convection_fan off")
     end
 
-    :ok = state.convection_fan_pid |> Gpio.write(value)
+    :ok = state.convection_fan_pid |> GPIO.write(value)
     state.subscribers |> notify_subscribers(:convection_fan, value)
 
     %State{state | convection_fan_value: value}

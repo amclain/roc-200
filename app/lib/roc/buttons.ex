@@ -15,18 +15,20 @@ defmodule ROC.Buttons do
 
   require Logger
 
+  alias ElixirALE.GPIO
+
   @start_button_pin Application.get_env(:roc_controller_io, :start_button)
   @stop_button_pin Application.get_env(:roc_controller_io, :stop_button)
   @mode_button_pin Application.get_env(:roc_controller_io, :mode_button)
 
   defstart start_link do
-    {:ok, start_button_pid} = Gpio.start_link(@start_button_pin, :input)
-    {:ok, stop_button_pid} = Gpio.start_link(@stop_button_pin, :input)
-    {:ok, mode_button_pid} = Gpio.start_link(@mode_button_pin, :input)
+    {:ok, start_button_pid} = GPIO.start_link(@start_button_pin, :input)
+    {:ok, stop_button_pid} = GPIO.start_link(@stop_button_pin, :input)
+    {:ok, mode_button_pid} = GPIO.start_link(@mode_button_pin, :input)
 
-    :ok = Gpio.set_int(start_button_pid, :both)
-    :ok = Gpio.set_int(stop_button_pid, :both)
-    :ok = Gpio.set_int(mode_button_pid, :both)
+    :ok = GPIO.set_int(start_button_pid, :both)
+    :ok = GPIO.set_int(stop_button_pid, :both)
+    :ok = GPIO.set_int(mode_button_pid, :both)
 
     initial_state(%State{
       subscribers: [],
@@ -37,9 +39,9 @@ defmodule ROC.Buttons do
   end
 
   defcast stop, state: state do
-    Gpio.release(state.start_button_pid)
-    Gpio.release(state.stop_button_pid)
-    Gpio.release(state.mode_button_pid)
+    GPIO.release(state.start_button_pid)
+    GPIO.release(state.stop_button_pid)
+    GPIO.release(state.mode_button_pid)
 
     stop_server(:normal)
   end

@@ -2,14 +2,15 @@ defmodule ROC.ButtonsTest do
   use ESpec, async: false
 
   alias ROC.Buttons
+  alias ElixirALE.GPIO
 
   @start_button_pin Application.get_env(:roc_controller_io, :start_button)
   @stop_button_pin Application.get_env(:roc_controller_io, :stop_button)
   @mode_button_pin Application.get_env(:roc_controller_io, :mode_button)
 
   before do
-    allow(Gpio).to accept(:start_link, fn(_pin, _dir) -> {:ok, self()} end)
-    allow(Gpio).to accept(:set_int, fn(_pid, _edge) -> :ok end)
+    allow(GPIO).to accept(:start_link, fn(_pin, _dir) -> {:ok, self()} end)
+    allow(GPIO).to accept(:set_int, fn(_pid, _edge) -> :ok end)
 
     Buttons.start_link
   end
@@ -18,9 +19,9 @@ defmodule ROC.ButtonsTest do
     self() |> Buttons.unsubscribe
 
     # For some reason Buttons.stop raises the following error:
-    #   (UndefinedFunctionError) function Gpio.release/1 is undefined (module
-    #   Gpio is not available)
-    # allow(Gpio).to accept(:release, fn(_pid) -> :ok end)
+    #   (UndefinedFunctionError) function GPIO.release/1 is undefined (module
+    #   GPIO is not available)
+    # allow(GPIO).to accept(:release, fn(_pid) -> :ok end)
 
     # :ok = Buttons.stop
   end

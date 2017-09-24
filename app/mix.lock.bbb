@@ -1,6 +1,6 @@
 %{"bootloader": {:hex, :bootloader, "0.1.2", "835ddcf50b796714658f342061d5d48ebc34cbd0d81cdbd5a5a8ae00705d72b1", [], [{:distillery, "~> 1.0", [hex: :distillery, repo: "hexpm", optional: false]}], "hexpm"},
   "distillery": {:hex, :distillery, "1.5.1", "7ad7354214959c0f65f57ddd49478c81c3b2733ca2e5ccfb9eb55351108466aa", [], [], "hexpm"},
-  "elixir_ale": {:hex, :elixir_ale, "0.5.7", "f6b978dd30dc3ecf2b5feaef862d30873c6a6fdca41fc7f6bb743d6783b3fe4b", [], [{:elixir_make, "~> 0.4", [hex: :elixir_make, repo: "hexpm", optional: false]}], "hexpm"},
+  "elixir_ale": {:hex, :elixir_ale, "1.0.0", "e1e4b01cfdce54bf93cf09971bb75b76422a818fe97c9a1622a72d8ee32f61a8", [:make, :mix], [{:elixir_make, "~> 0.4", [hex: :elixir_make, repo: "hexpm", optional: false]}], "hexpm"},
   "elixir_make": {:hex, :elixir_make, "0.4.0", "992f38fabe705bb45821a728f20914c554b276838433349d4f2341f7a687cddf", [], [], "hexpm"},
   "espec": {:hex, :espec, "1.4.6", "9ac809d2a7ce64b9dbb468a517fe0c00c0464e4aeb918709ad2ba68a0a0d6536", [], [{:meck, "0.8.7", [hex: :meck, repo: "hexpm", optional: false]}], "hexpm"},
   "exactor": {:hex, :exactor, "2.2.3", "a6972f43bb6160afeb73e1d8ab45ba604cd0ac8b5244c557093f6e92ce582786", [], [], "hexpm"},

@@ -2,6 +2,7 @@ defmodule ROC.OvenTest do
   use ESpec, async: false
 
   alias ROC.OvenRelays
+  alias ElixirALE.GPIO
 
   @top_element_pin Application.get_env(:roc_controller_io, :top_element)
   @bottom_element_pin Application.get_env(:roc_controller_io, :bottom_element)
@@ -12,7 +13,7 @@ defmodule ROC.OvenTest do
   def convection_fan_pid, do: :c.pid(0,253,0)
 
   before do
-    allow(Gpio).to accept(:start_link, fn(pin, _dir) ->
+    allow(GPIO).to accept(:start_link, fn(pin, _dir) ->
       pid =
         case pin do
           @top_element_pin -> top_element_pid()
@@ -23,7 +24,7 @@ defmodule ROC.OvenTest do
       {:ok, pid}
     end)
 
-    allow(Gpio).to accept(:write, fn(_pin, _value) -> :ok end)
+    allow(GPIO).to accept(:write, fn(_pin, _value) -> :ok end)
 
     OvenRelays.start_link
     self() |> OvenRelays.subscribe
@@ -33,9 +34,9 @@ defmodule ROC.OvenTest do
     self() |> OvenRelays.unsubscribe
 
     # For some reason OvenRelays.stop raises the following error:
-    #   (UndefinedFunctionError) function Gpio.release/1 is undefined (module
-    #   Gpio is not available)
-    # allow(Gpio).to accept(:release, fn(_pid) -> :ok end)
+    #   (UndefinedFunctionError) function GPIO.release/1 is undefined (module
+    #   GPIO is not available)
+    # allow(GPIO).to accept(:release, fn(_pid) -> :ok end)
 
     # :ok = OvenRelays.stop
   end
@@ -44,7 +45,7 @@ defmodule ROC.OvenTest do
     OvenRelays.top_element_active(true)
     |> should(eq :ok)
 
-    expect(Gpio).to accepted(:write, [top_element_pid(), true])
+    expect(GPIO).to accepted(:write, [top_element_pid(), true])
     assert_receive {:oven_relay, :top_element, true}
   end
 
@@ -52,7 +53,7 @@ defmodule ROC.OvenTest do
     OvenRelays.top_element_active(false)
     |> should(eq :ok)
 
-    expect(Gpio).to accepted(:write, [top_element_pid(), false])
+    expect(GPIO).to accepted(:write, [top_element_pid(), false])
     assert_receive {:oven_relay, :top_element, false}
   end
 
@@ -60,7 +61,7 @@ defmodule ROC.OvenTest do
     OvenRelays.bottom_element_active(true)
     |> should(eq :ok)
 
-    expect(Gpio).to accepted(:write, [bottom_element_pid(), true])
+    expect(GPIO).to accepted(:write, [bottom_element_pid(), true])
     assert_receive {:oven_relay, :bottom_element, true}
   end
 
@@ -68,7 +69,7 @@ defmodule ROC.OvenTest do
     OvenRelays.bottom_element_active(false)
     |> should(eq :ok)
 
-    expect(Gpio).to accepted(:write, [bottom_element_pid(), false])
+    expect(GPIO).to accepted(:write, [bottom_element_pid(), false])
     assert_receive {:oven_relay, :bottom_element, false}
   end
 
@@ -76,7 +77,7 @@ defmodule ROC.OvenTest do
     OvenRelays.convection_fan_active(true)
     |> should(eq :ok)
 
-    expect(Gpio).to accepted(:write, [convection_fan_pid(), true])
+    expect(GPIO).to accepted(:write, [convection_fan_pid(), true])
     assert_receive {:oven_relay, :convection_fan, true}
   end
 
@@ -84,7 +85,7 @@ defmodule ROC.OvenTest do
     OvenRelays.convection_fan_active(false)
     |> should(eq :ok)
 
-    expect(Gpio).to accepted(:write, [convection_fan_pid(), false])
+    expect(GPIO).to accepted(:write, [convection_fan_pid(), false])
     assert_receive {:oven_relay, :convection_fan, false}
   end
 
@@ -92,9 +93,9 @@ defmodule ROC.OvenTest do
     OvenRelays.emergency_shutoff!
     |> should(eq :ok)
 
-    expect(Gpio).to accepted(:write, [top_element_pid(), false])
-    expect(Gpio).to accepted(:write, [bottom_element_pid(), false])
-    expect(Gpio).to accepted(:write, [convection_fan_pid(), false])
+    expect(GPIO).to accepted(:write, [top_element_pid(), false])
+    expect(GPIO).to accepted(:write, [bottom_element_pid(), false])
+    expect(GPIO).to accepted(:write, [convection_fan_pid(), false])
 
     assert_receive {:oven_relay, :top_element, false}
     assert_receive {:oven_relay, :bottom_element, false}
