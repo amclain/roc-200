@@ -55,7 +55,7 @@ defmodule ROC.Mixfile do
       {:bootloader, "0.1.2"},
       {:nerves_runtime, "0.4.4"},
       {:elixir_ale, "1.0.0"},
-      {:nerves_network, "0.3.3"},
+      {:nerves_network, "0.3.4"},
       {:nerves_ntp, "0.1.1"},
     ] ++ system(target)
   end
