@@ -25,4 +25,6 @@ config :roc_controller_io,
   top_element: 66,
   bottom_element: 69,
   convection_fan: 45,
-  running_light: 47
+  running_light: 47,
+  spi0_cs0: 48,
+  spi0_cs1: 31
