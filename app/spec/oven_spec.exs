@@ -8,17 +8,21 @@ defmodule ROC.OvenTest do
   @bottom_element_pin Application.get_env(:roc_controller_io, :bottom_element)
   @convection_fan_pin Application.get_env(:roc_controller_io, :convection_fan)
 
-  def top_element_pid, do: :c.pid(0,251,0)
-  def bottom_element_pid, do: :c.pid(0,252,0)
-  def convection_fan_pid, do: :c.pid(0,253,0)
+  let :top_element_pid, do: :c.pid(0,251,0)
+  let :bottom_element_pid, do: :c.pid(0,252,0)
+  let :convection_fan_pid, do: :c.pid(0,253,0)
 
   before do
+    top_element_pid = top_element_pid()
+    bottom_element_pid = bottom_element_pid()
+    convection_fan_pid = convection_fan_pid()
+
     allow(GPIO).to accept(:start_link, fn(pin, _dir) ->
       pid =
         case pin do
-          @top_element_pin -> top_element_pid()
-          @bottom_element_pin -> bottom_element_pid()
-          @convection_fan_pin -> convection_fan_pid()
+          @top_element_pin -> top_element_pid
+          @bottom_element_pin -> bottom_element_pid
+          @convection_fan_pin -> convection_fan_pid
         end
 
       {:ok, pid}
