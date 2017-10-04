@@ -16,6 +16,7 @@ config :nerves_ntp, :servers, [
 ]
 
 config :roc, :network_interface, "eth0"
+config :roc, :storage_path, "/root/jobs"
 
 config :roc_controller_io,
   start_button: 67,
@@ -28,3 +29,5 @@ config :roc_controller_io,
   running_light: 47,
   spi0_cs0: 48,
   spi0_cs1: 31
+
+if Mix.env == :test, do: import_config("espec_config.exs")

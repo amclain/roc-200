@@ -2,6 +2,7 @@
 /_build
 /db
 /deps
+/logs
 /*.ez
 
 # Nerves artifacts
