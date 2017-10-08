@@ -8180,6 +8180,7 @@ LETTER landscape</description>
 <text x="39.116" y="140.97" size="1.778" layer="97" rot="R180">Bottom Thermocouple - SPI CS1</text>
 <text x="108.966" y="165.608" size="2.1844" layer="97">BeagleBone Black</text>
 <text x="215.9" y="68.58" size="1.778" layer="97">(+)</text>
+<text x="209.55" y="80.01" size="1.778" layer="97">To Controller Relays J1</text>
 </plain>
 <instances>
 <instance part="P8" gate="A" x="119.38" y="129.54"/>
