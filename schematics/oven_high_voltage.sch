@@ -4392,14 +4392,16 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <wire x1="0" y1="0" x2="71.12" y2="0" width="0.1016" layer="94"/>
 <wire x1="101.6" y1="15.24" x2="87.63" y2="15.24" width="0.1016" layer="94"/>
 <wire x1="0" y1="0" x2="0" y2="5.08" width="0.1016" layer="94"/>
-<wire x1="0" y1="5.08" x2="71.12" y2="5.08" width="0.1016" layer="94"/>
+<wire x1="0" y1="5.08" x2="16.51" y2="5.08" width="0.1016" layer="94"/>
+<wire x1="16.51" y1="5.08" x2="71.12" y2="5.08" width="0.1016" layer="94"/>
 <wire x1="0" y1="5.08" x2="0" y2="15.24" width="0.1016" layer="94"/>
 <wire x1="101.6" y1="15.24" x2="101.6" y2="5.08" width="0.1016" layer="94"/>
 <wire x1="71.12" y1="5.08" x2="71.12" y2="0" width="0.1016" layer="94"/>
 <wire x1="71.12" y1="5.08" x2="87.63" y2="5.08" width="0.1016" layer="94"/>
 <wire x1="71.12" y1="0" x2="101.6" y2="0" width="0.1016" layer="94"/>
 <wire x1="87.63" y1="15.24" x2="87.63" y2="5.08" width="0.1016" layer="94"/>
-<wire x1="87.63" y1="15.24" x2="0" y2="15.24" width="0.1016" layer="94"/>
+<wire x1="87.63" y1="15.24" x2="16.51" y2="15.24" width="0.1016" layer="94"/>
+<wire x1="16.51" y1="15.24" x2="0" y2="15.24" width="0.1016" layer="94"/>
 <wire x1="87.63" y1="5.08" x2="101.6" y2="5.08" width="0.1016" layer="94"/>
 <wire x1="101.6" y1="5.08" x2="101.6" y2="0" width="0.1016" layer="94"/>
 <wire x1="0" y1="15.24" x2="0" y2="22.86" width="0.1016" layer="94"/>
@@ -4419,6 +4421,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <text x="7.62" y="7.62" size="2.54" layer="94" align="bottom-center">&gt;DRAWN_BY</text>
 <text x="94.742" y="7.62" size="2.54" layer="94" align="bottom-center">&gt;REV</text>
 <text x="50.8" y="27.432" size="3.175" layer="94" align="bottom-center">&gt;COMPANY_NAME</text>
+<wire x1="16.51" y1="15.24" x2="16.51" y2="5.08" width="0.1016" layer="94"/>
 </symbol>
 </symbols>
 <devicesets>
