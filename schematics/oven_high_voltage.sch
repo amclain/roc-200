@@ -4401,8 +4401,8 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <sheets>
 <sheet>
 <plain>
-<text x="123.19" y="126.492" size="1.778" layer="91">Top Elements</text>
-<text x="123.19" y="111.506" size="1.778" layer="91">Bottom Elements</text>
+<text x="123.19" y="126.492" size="1.778" layer="97">Top Elements</text>
+<text x="123.19" y="111.506" size="1.778" layer="97">Bottom Elements</text>
 </plain>
 <instances>
 <instance part="R1" gate="G$1" x="127" y="121.92"/>
