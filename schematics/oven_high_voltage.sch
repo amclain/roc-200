@@ -4380,6 +4380,72 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </deviceset>
 </devicesets>
 </library>
+<library name="frames">
+<description>amclain's Frames for Sheet and Layout</description>
+<packages>
+</packages>
+<symbols>
+<symbol name="LETTER_L">
+<frame x1="0" y1="0" x2="248.92" y2="185.42" columns="12" rows="17" layer="94" border-left="no" border-top="no" border-right="no" border-bottom="no"/>
+</symbol>
+<symbol name="DOCFIELD">
+<wire x1="0" y1="0" x2="71.12" y2="0" width="0.1016" layer="94"/>
+<wire x1="101.6" y1="15.24" x2="87.63" y2="15.24" width="0.1016" layer="94"/>
+<wire x1="0" y1="0" x2="0" y2="5.08" width="0.1016" layer="94"/>
+<wire x1="0" y1="5.08" x2="71.12" y2="5.08" width="0.1016" layer="94"/>
+<wire x1="0" y1="5.08" x2="0" y2="15.24" width="0.1016" layer="94"/>
+<wire x1="101.6" y1="15.24" x2="101.6" y2="5.08" width="0.1016" layer="94"/>
+<wire x1="71.12" y1="5.08" x2="71.12" y2="0" width="0.1016" layer="94"/>
+<wire x1="71.12" y1="5.08" x2="87.63" y2="5.08" width="0.1016" layer="94"/>
+<wire x1="71.12" y1="0" x2="101.6" y2="0" width="0.1016" layer="94"/>
+<wire x1="87.63" y1="15.24" x2="87.63" y2="5.08" width="0.1016" layer="94"/>
+<wire x1="87.63" y1="15.24" x2="0" y2="15.24" width="0.1016" layer="94"/>
+<wire x1="87.63" y1="5.08" x2="101.6" y2="5.08" width="0.1016" layer="94"/>
+<wire x1="101.6" y1="5.08" x2="101.6" y2="0" width="0.1016" layer="94"/>
+<wire x1="0" y1="15.24" x2="0" y2="22.86" width="0.1016" layer="94"/>
+<wire x1="101.6" y1="35.56" x2="0" y2="35.56" width="0.1016" layer="94"/>
+<wire x1="101.6" y1="35.56" x2="101.6" y2="22.86" width="0.1016" layer="94"/>
+<wire x1="0" y1="22.86" x2="101.6" y2="22.86" width="0.1016" layer="94"/>
+<wire x1="0" y1="22.86" x2="0" y2="35.56" width="0.1016" layer="94"/>
+<wire x1="101.6" y1="22.86" x2="101.6" y2="15.24" width="0.1016" layer="94"/>
+<text x="1.27" y="1.524" size="1.778" layer="94">DATE:</text>
+<text x="9.906" y="1.524" size="1.778" layer="94">&gt;DATE_DRAWN</text>
+<text x="72.39" y="1.524" size="1.778" layer="94">SHEET:</text>
+<text x="82.804" y="1.524" size="1.778" layer="94">&gt;SHEET_NUM</text>
+<text x="88.9" y="12.446" size="1.778" layer="94">REV:</text>
+<text x="1.27" y="20.066" size="1.778" layer="94">TITLE:</text>
+<text x="1.27" y="12.446" size="1.778" layer="94">DRAWN BY:</text>
+<text x="50.8" y="17.78" size="2.54" layer="94" align="bottom-center">&gt;TITLE</text>
+<text x="7.62" y="7.62" size="2.54" layer="94" align="bottom-center">&gt;DRAWN_BY</text>
+<text x="94.742" y="7.62" size="2.54" layer="94" align="bottom-center">&gt;REV</text>
+<text x="50.8" y="27.432" size="3.175" layer="94" align="bottom-center">&gt;COMPANY_NAME</text>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="LETTER_L" prefix="FRAME" uservalue="yes">
+<description>&lt;b&gt;FRAME&lt;/b&gt;&lt;p&gt;
+LETTER landscape</description>
+<gates>
+<gate name="G$1" symbol="LETTER_L" x="0" y="0"/>
+<gate name="G$2" symbol="DOCFIELD" x="147.32" y="0" addlevel="must"/>
+</gates>
+<devices>
+<device name="">
+<technologies>
+<technology name="">
+<attribute name="COMPANY_NAME" value="COMPANY_NAME" constant="no"/>
+<attribute name="DATE_DRAWN" value="DATE_DRAWN" constant="no"/>
+<attribute name="DRAWN_BY" value="AAA" constant="no"/>
+<attribute name="REV" value="A" constant="no"/>
+<attribute name="SHEET_NUM" value="1/1" constant="no"/>
+<attribute name="TITLE" value="TITLE" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -4397,6 +4463,14 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="P1" library="con-lstb" library_urn="urn:adsk.eagle:library:162" deviceset="MA05-1" device="" package3d_urn="urn:adsk.eagle:package:8332/1"/>
 <part name="M1" library="SparkFun-Electromechanical" deviceset="MOTOR" device="10MM" value="Convection Fan"/>
 <part name="GND1" library="SparkFun-PowerSymbols" deviceset="GND2" device="" value="Chassis Ground"/>
+<part name="FRAME1" library="frames" deviceset="LETTER_L" device="">
+<attribute name="COMPANY_NAME" value="An Alex McLain Design"/>
+<attribute name="DATE_DRAWN" value="2017-10-03"/>
+<attribute name="DRAWN_BY" value="AM"/>
+<attribute name="REV" value=""/>
+<attribute name="SHEET_NUM" value=""/>
+<attribute name="TITLE" value="OVEN HIGH VOLTAGE"/>
+</part>
 </parts>
 <sheets>
 <sheet>
@@ -4417,6 +4491,15 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <instance part="GND1" gate="G$1" x="101.6" y="81.28" smashed="yes">
 <attribute name="VALUE" x="101.6" y="77.724" size="1.778" layer="96" align="top-center"/>
 </instance>
+<instance part="FRAME1" gate="G$1" x="0" y="0">
+<attribute name="COMPANY_NAME" x="0" y="0" size="1.778" layer="96" display="off"/>
+<attribute name="DATE_DRAWN" x="0" y="0" size="1.778" layer="96" display="off"/>
+<attribute name="DRAWN_BY" x="0" y="0" size="1.778" layer="96" display="off"/>
+<attribute name="REV" x="0" y="0" size="1.778" layer="96" display="off"/>
+<attribute name="SHEET_NUM" x="0" y="0" size="1.778" layer="96" display="off"/>
+<attribute name="TITLE" x="0" y="0" size="1.778" layer="96" display="off"/>
+</instance>
+<instance part="FRAME1" gate="G$2" x="147.32" y="0"/>
 </instances>
 <busses>
 </busses>
