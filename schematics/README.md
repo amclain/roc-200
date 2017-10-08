@@ -5,4 +5,3 @@ which has a free download option available.
 
 These schematics use the following add-on libraries:
 * [amclain/eagle-libraries](https://github.com/amclain/eagle-libraries)
-* [sparkfun/SparkFun-Eagle-Libraries](https://github.com/sparkfun/SparkFun-Eagle-Libraries)

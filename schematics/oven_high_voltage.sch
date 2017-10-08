@@ -4337,49 +4337,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </deviceset>
 </devicesets>
 </library>
-<library name="SparkFun-PowerSymbols">
-<description>&lt;h3&gt;SparkFun Power Symbols&lt;/h3&gt;
-This library contains power, ground, and voltage-supply symbols.
-&lt;br&gt;
-&lt;br&gt;
-We've spent an enormous amount of time creating and checking these footprints and parts, but it is &lt;b&gt; the end user's responsibility&lt;/b&gt; to ensure correctness and suitablity for a given componet or application. 
-&lt;br&gt;
-&lt;br&gt;If you enjoy using this library, please buy one of our products at &lt;a href=" www.sparkfun.com"&gt;SparkFun.com&lt;/a&gt;.
-&lt;br&gt;
-&lt;br&gt;
-&lt;b&gt;Licensing:&lt;/b&gt; Creative Commons ShareAlike 4.0 International - https://creativecommons.org/licenses/by-sa/4.0/ 
-&lt;br&gt;
-&lt;br&gt;
-You are welcome to use this library for commercial purposes. For attribution, we ask that when you begin to sell your device using our footprint, you email us with a link to the product being sold. We want bragging rights that we helped (in a very small part) to create your 8th world wonder. We would like the opportunity to feature your device on our homepage.</description>
-<packages>
-</packages>
-<symbols>
-<symbol name="GND">
-<description>&lt;h3&gt;Ground Supply (Earth Ground Symbol)&lt;/h3&gt;</description>
-<pin name="3.3V" x="0" y="2.54" visible="off" length="short" direction="sup" rot="R270"/>
-<wire x1="-2.032" y1="0" x2="2.032" y2="0" width="0.254" layer="94"/>
-<wire x1="-1.27" y1="-0.762" x2="1.27" y2="-0.762" width="0.254" layer="94"/>
-<wire x1="-0.508" y1="-1.524" x2="0.508" y2="-1.524" width="0.254" layer="94"/>
-<text x="0" y="-1.778" size="1.778" layer="96" align="top-center">&gt;VALUE</text>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="GND2" prefix="GND">
-<description>&lt;h3&gt;Ground Supply (Earth Ground style)&lt;/h3&gt;
-&lt;p&gt;Ground supply with a traditional "earth ground" symbol.&lt;/p&gt;</description>
-<gates>
-<gate name="G$1" symbol="GND" x="2.54" y="0"/>
-</gates>
-<devices>
-<device name="">
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
 <library name="frames">
 <description>amclain's Frames for Sheet and Layout</description>
 <packages>
@@ -4449,6 +4406,36 @@ LETTER landscape</description>
 </deviceset>
 </devicesets>
 </library>
+<library name="supply">
+<description>amclain's Supply Symbols</description>
+<packages>
+</packages>
+<symbols>
+<symbol name="CGND">
+<wire x1="-1.905" y1="0" x2="0" y2="0" width="0.254" layer="94"/>
+<pin name="GND" x="0" y="2.54" visible="off" length="short" direction="sup" rot="R270"/>
+<wire x1="0" y1="0" x2="1.905" y2="0" width="0.254" layer="94"/>
+<wire x1="0" y1="0" x2="-1.27" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="2.032" y1="0" x2="0.762" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="-2.032" y1="0" x2="-3.302" y2="-2.54" width="0.254" layer="94"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="CGND" prefix="GND">
+<description>&lt;b&gt;SUPPLY SYMBOL&lt;/b&gt;</description>
+<gates>
+<gate name="1" symbol="CGND" x="0" y="0"/>
+</gates>
+<devices>
+<device name="">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -4465,7 +4452,6 @@ LETTER landscape</description>
 <part name="R4" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="0204/7" package3d_urn="urn:adsk.eagle:package:25945/1"/>
 <part name="P1" library="con-lstb" library_urn="urn:adsk.eagle:library:162" deviceset="MA05-1" device="" package3d_urn="urn:adsk.eagle:package:8332/1"/>
 <part name="M1" library="SparkFun-Electromechanical" deviceset="MOTOR" device="10MM" value="Convection Fan"/>
-<part name="GND1" library="SparkFun-PowerSymbols" deviceset="GND2" device="" value="Chassis Ground"/>
 <part name="FRAME1" library="frames" deviceset="LETTER_L" device="">
 <attribute name="COMPANY_NAME" value="An Alex McLain Design"/>
 <attribute name="DATE_DRAWN" value="2017-10-03"/>
@@ -4474,6 +4460,7 @@ LETTER landscape</description>
 <attribute name="SHEET_NUM" value=""/>
 <attribute name="TITLE" value="OVEN HIGH VOLTAGE"/>
 </part>
+<part name="GND1" library="supply" deviceset="CGND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -4497,9 +4484,6 @@ LETTER landscape</description>
 <attribute name="NAME" x="130.81" y="97.282" size="1.778" layer="95" font="vector"/>
 <attribute name="VALUE" x="130.81" y="88.646" size="1.778" layer="96" font="vector"/>
 </instance>
-<instance part="GND1" gate="G$1" x="104.14" y="81.28" smashed="yes">
-<attribute name="VALUE" x="104.14" y="77.724" size="1.778" layer="96" align="top-center"/>
-</instance>
 <instance part="FRAME1" gate="G$1" x="0" y="0">
 <attribute name="COMPANY_NAME" x="0" y="0" size="1.778" layer="96" display="off"/>
 <attribute name="DATE_DRAWN" x="0" y="0" size="1.778" layer="96" display="off"/>
@@ -4509,6 +4493,7 @@ LETTER landscape</description>
 <attribute name="TITLE" x="0" y="0" size="1.778" layer="96" display="off"/>
 </instance>
 <instance part="FRAME1" gate="G$2" x="147.32" y="0"/>
+<instance part="GND1" gate="1" x="104.14" y="81.28"/>
 </instances>
 <busses>
 </busses>
@@ -4571,12 +4556,12 @@ LETTER landscape</description>
 <junction x="160.02" y="106.68"/>
 </segment>
 </net>
-<net name="3.3V" class="0">
+<net name="GND" class="0">
 <segment>
 <pinref part="P1" gate="G$1" pin="5"/>
-<pinref part="GND1" gate="G$1" pin="3.3V"/>
 <wire x1="101.6" y1="88.9" x2="104.14" y2="88.9" width="0.1524" layer="91"/>
 <wire x1="104.14" y1="88.9" x2="104.14" y2="83.82" width="0.1524" layer="91"/>
+<pinref part="GND1" gate="1" pin="GND"/>
 </segment>
 </net>
 </nets>
