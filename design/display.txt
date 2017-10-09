@@ -1,0 +1,42 @@
+--------------------------------------------------------------------------------
+Display States
+--------------------------------------------------------------------------------
+
+
+Idle:
+* Selected profile
+* Profile Number / Total Profiles
+* IP Address
+
+----------------
+Profile:     1/2
+Sn63Pb37
+----------------
+
+----------------
+IP Address:
+192.168.0.2
+----------------
+
+
+Running:
+* Stage (Heat, Soak, Reflow, Cooldown)
+* Temperature
+* Elapsed Time
+* Stage Time
+* Selected Profile
+
+----------------
+Stage: Reflow
+Temp:  205.25
+----------------
+
+----------------
+Total: 00:00
+Stage: 00:00
+----------------
+
+----------------
+Profile:     1/2
+Sn63Pb47
+----------------
