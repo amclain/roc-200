@@ -1,7 +1,7 @@
 defmodule ROC.Application do
   use Application
 
-  alias ROC.{Buttons, Controller, Network, OvenRelays, SPI}
+  alias ROC.{Buttons, Controller, LCD, Network, OvenRelays, SPI}
 
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
@@ -11,6 +11,7 @@ defmodule ROC.Application do
       worker(Buttons, []),
       worker(OvenRelays, []),
       worker(SPI, []),
+      worker(LCD, []),
       worker(Controller, []),
     ]
 

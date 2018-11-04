@@ -7,12 +7,14 @@ defmodule ROC.SPI do
     :spi0_pid,
     :cs0_pid,
     :cs1_pid,
+    :cs2_pid,
   ]
 
   use ExActor.GenServer, export: __MODULE__
 
   @spi0_cs0_pin Application.get_env(:roc_controller_io, :spi0_cs0)
   @spi0_cs1_pin Application.get_env(:roc_controller_io, :spi0_cs1)
+  @spi0_cs2_pin Application.get_env(:roc_controller_io, :spi0_cs2)
 
   defstart start_link do
     enable_spi_hardware()
@@ -20,14 +22,17 @@ defmodule ROC.SPI do
     {:ok, spi0_pid} = ElixirALE.SPI.start_link("spidev1.0")
     {:ok, cs0_pid} = ElixirALE.GPIO.start_link(@spi0_cs0_pin, :output)
     {:ok, cs1_pid} = ElixirALE.GPIO.start_link(@spi0_cs1_pin, :output)
+    {:ok, cs2_pid} = ElixirALE.GPIO.start_link(@spi0_cs2_pin, :output)
 
     :ok = cs0_pid |> ElixirALE.GPIO.write(true)
     :ok = cs1_pid |> ElixirALE.GPIO.write(true)
+    :ok = cs2_pid |> ElixirALE.GPIO.write(true)
 
     initial_state(%State{
       spi0_pid: spi0_pid,
       cs0_pid: cs0_pid,
       cs1_pid: cs1_pid,
+      cs2_pid: cs2_pid,
     })
   end
 
@@ -36,6 +41,7 @@ defmodule ROC.SPI do
 
     state.cs0_pid |> ElixirALE.GPIO.release
     state.cs1_pid |> ElixirALE.GPIO.release
+    state.cs2_pid |> ElixirALE.GPIO.release
 
     stop_server(:normal)
   end
@@ -75,6 +81,7 @@ defmodule ROC.SPI do
       case cs_id do
         0 -> state.cs0_pid
         1 -> state.cs1_pid
+        2 -> state.cs2_pid
       end
 
     {spi0_pid, cs_pid}
@@ -83,7 +90,7 @@ defmodule ROC.SPI do
   # Dispatch a payload to the given device on the SPI bus and receive a message.
   defp dispatch({spi0_pid, cs_pid}, payload) do
     cs_pid |> ElixirALE.GPIO.write(false)
-    received_data = spi0_pid |> ElixirALE.SPI.transfer(payload)
+    received_data = spi0_pid |> ElixirALE.SPI.transfer(String.reverse(payload))
     cs_pid |> ElixirALE.GPIO.write(true)
 
     received_data

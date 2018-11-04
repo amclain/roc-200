@@ -13,7 +13,7 @@ defmodule ROC.Mixfile do
     [
       app: :roc,
       version: "0.1.0",
-      elixir: "1.5.1",
+      elixir: "1.5.2",
       target: @target,
       archives: [nerves_bootstrap: "~> 0.6"],
       deps_path: "deps/#{@target}",

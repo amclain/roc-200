@@ -27,7 +27,9 @@ config :roc_controller_io,
   bottom_element: 69,
   convection_fan: 45,
   running_light: 47,
-  spi0_cs0: 48,
-  spi0_cs1: 31
+  lcd_reset: 49,
+  spi0_cs0: 48, # Temp Top
+  spi0_cs1: 31, # Temp Bottom
+  spi0_cs2: 60 # LCD
 
 if Mix.env == :test, do: import_config("espec_config.exs")
